@@ -27,17 +27,17 @@ TEMPLATE_DEBUG = True
 ALLOWED_HOSTS = []
 
 REST_FRAMEWORK = {
-    'DEFAULT_AUTHENTICATION_CLASSES': 
+    'DEFAULT_AUTHENTICATION_CLASSES':
         ('rest_framework.authentication.OAuth2Authentication',
          'rest_framework.authentication.SessionAuthentication'),
 
     'DEFAULT_MODEL_SERIALIZER_CLASS':
         'rest_framework.serializers.ModelSerializer',
 
-    'DEFAULT_PERMISSION_CLASSES': 
-    ('rest_framework.permissions.IsAdminUser',) 
+    'DEFAULT_PERMISSION_CLASSES':
+    ('rest_framework.permissions.IsAdminUser',)
 }
- 
+
 # Application definition
 INSTALLED_APPS = (
     'django.contrib.admin',

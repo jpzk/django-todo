@@ -15,7 +15,8 @@ from rest_framework.views import APIView
 from provider.oauth2.models import Client
 
 # Todo App
-from todo.serializers import RegistrationSerializer, UserSerializer, TodoSerializer
+from todo.serializers import RegistrationSerializer
+from todo.serializers import UserSerializer, TodoSerializer
 from todo.models import Todo
 
 class RegistrationView(APIView):

@@ -7,7 +7,6 @@ router.register(r'users', views.UserViewSet)
 router.register(r'todos', views.TodoViewSet)
 
 urlpatterns = patterns('',
-
     # For admin
     url(r'^data/', include(router.urls)),
 
@@ -21,6 +20,7 @@ urlpatterns = patterns('',
 
     # API authentification
     url(r'^oauth2/', include('provider.oauth2.urls', namespace='oauth2')),
-    url(r'^api-auth/', include('rest_framework.urls', namespace='rest_framework')),
+    url(r'^api-auth/', include('rest_framework.urls',\
+        namespace='rest_framework')),
 )
 
