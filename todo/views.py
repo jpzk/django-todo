@@ -45,13 +45,6 @@ class RegistrationView(APIView):
         created = status.HTTP_201_CREATED
         return Response(serializer.data, status=created)
 
-class UserView(APIView):
-    permission_classes = (IsAuthenticated,)
-    def get(self, request):
-        user = User.objects.get(pk=request.user.id)
-        serializer = UserSerializer(user, context={'request':request})
-        return Response(serializer.data)
-
 class TodosView(APIView):
     permission_classes = (IsAuthenticated,)
 
@@ -89,13 +82,4 @@ class TodosView(APIView):
             t.save()
             request.DATA['id'] = t.pk # return id
             return Response(request.DATA, status=status.HTTP_201_CREATED)
-
-# Admin views REST Framework
-class UserViewSet(viewsets.ModelViewSet):
-    queryset = User.objects.all()
-    serializer_class = UserSerializer
-
-class TodoViewSet(viewsets.ModelViewSet):
-    queryset = Todo.objects.all()
-    serializer_class = TodoSerializer
 

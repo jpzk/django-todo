@@ -15,7 +15,7 @@ class UserAPITestCase(APITestCase):
         return User.objects.get(username=cred['username'])
 
     def register(self, cred):
-        response = self.client.post('/registration/', cred)
+        response = self.client.post('/register/', cred)
         return response
 
     def get_token(self, cred):
@@ -50,14 +50,14 @@ class RegistrationTest(UserAPITestCase):
         self.register(self.user1)
         self.get_token(self.user1)
 
-        response = self.client.get('/user/')
+        response = self.client.get('/todos/')
         self.assertEqual(response.status_code, status.HTTP_200_OK)
 
 class TodoTest(UserAPITestCase):
 
     def create_todo(self):
         data = {'description':'remember the milk'}
-        return self.client.post('/user/todos/', data)
+        return self.client.post('/todos/', data)
 
     def test_create_todo(self):
         """ Create a todo. """
@@ -69,7 +69,7 @@ class TodoTest(UserAPITestCase):
         expected_code = status.HTTP_201_CREATED
         self.assertEqual(response.status_code, expected_code)
 
-        response = self.client.get('/user/todos/')
+        response = self.client.get('/todos/')
         expected_data = {'id':1, 'description':'remember the milk','done':False}
 
         self.assertEqual(len(response.data), 1)
@@ -83,10 +83,10 @@ class TodoTest(UserAPITestCase):
         self.get_token(self.user1)
         self.create_todo()
 
-        response = self.client.put('/user/todos/1', data)
+        response = self.client.put('/todos/1', data)
         expected_code = status.HTTP_200_OK
 
-        response = self.client.get('/user/todos/')
+        response = self.client.get('/todos/')
         expected_data = {'id':1, 'description':'remember the milk','done':True}
 
         self.assertEqual(len(response.data), 1)
