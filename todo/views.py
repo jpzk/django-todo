@@ -52,6 +52,20 @@ class TodosView(APIView):
         serializer = TodoSerializer(todos, many=True)
         return Response(serializer.data)
 
+    def post(self, request):
+        """ Adding a new todo. """
+        serializer = TodoSerializer(data=request.DATA)
+        if not serializer.is_valid():
+            return Response(serializer.errors, status=
+                status.HTTP_400_BAD_REQUEST)
+        else:
+            data = serializer.data
+            owner = request.user
+            t = Todo(owner=owner, description=data['description'], done=False)
+            t.save()
+            request.DATA['id'] = t.pk # return id
+            return Response(request.DATA, status=status.HTTP_201_CREATED)
+
     def put(self, request, todo_id):
         """ Update a todo """
         serializer = TodoSerializer(data=request.DATA)
@@ -67,17 +81,4 @@ class TodosView(APIView):
             t.save()
             return Response(status=status.HTTP_200_OK)
 
-    def post(self, request):
-        """ Adding a new todo. """
-        serializer = TodoSerializer(data=request.DATA)
-        if not serializer.is_valid():
-            return Response(serializer.errors, status=
-                status.HTTP_400_BAD_REQUEST)
-        else:
-            data = serializer.data
-            owner = request.user
-            t = Todo(owner=owner, description=data['description'], done=False)
-            t.save()
-            request.DATA['id'] = t.pk # return id
-            return Response(request.DATA, status=status.HTTP_201_CREATED)
 
