@@ -24,15 +24,14 @@ class RegistrationView(APIView):
     permission_classes = ()
 
     def post(self, request):
-        bad_request = status.HTTP_400_BAD_REQUEST
         serializer = RegistrationSerializer(data=request.DATA)
 
         # Check format and unique constraint
         if not serializer.is_valid():
-            return Response({"error":serializer.errors},\
-                            status=bad_request)
+            return Response(serializer.errors,\
+                            status=status.HTTP_400_BAD_REQUEST)
         data = serializer.data
-        username = data['username']
+
         u = User.objects.create(username=data['username'])
         u.set_password(data['password'])
         u.save()
@@ -42,8 +41,7 @@ class RegistrationView(APIView):
         client = Client(user=u, name=name, url='' + name,\
                 client_id=name, client_secret='', client_type=1)
         client.save()
-        created = status.HTTP_201_CREATED
-        return Response(serializer.data, status=created)
+        return Response(serializer.data, status=status.HTTP_201_CREATED)
 
 class TodosView(APIView):
     permission_classes = (IsAuthenticated,)
