@@ -1,5 +1,7 @@
 # Django-Todo
 
+This project is part of this [tutorial](http://www.madewithtea.com/simple-todo-api-with-django-and-oauth2.html) how to implement a simple Todo REST API with Django, Django REST Framework and OAuth2.
+
 ## Example 
 
 ### Register a User
