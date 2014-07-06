@@ -14,7 +14,7 @@ http://localhost:8000/register/
 <pre>
 curl -X POST -d
 'username=jpzk&password=yourguess&grant_type=password&client_id=jpzk'
-https://localhost:8000/oauth2/access_token/
+http://localhost:8000/oauth2/access_token/
  
 {"access_token": "41b59e8238bb418c1fc98cfc6f523dd1a7839a03", "token_type":
 "Bearer", "expires_in": 2591999, "scope": "read"} 
@@ -31,8 +31,7 @@ http://localhost:8000/todos/
 ### Get All Todos
 
 <pre>
-curl -X GET -H 'Content-Type: application/json' -H 'Authorization: bearer
-00db9a38ea3f86d04dd3eeded9128620f11158eb' http://localhost:8000/todos/
+
 </pre>
 
 ### Update a Todo
@@ -41,5 +40,4 @@ curl -X GET -H 'Content-Type: application/json' -H 'Authorization: bearer
 curl -X PUT -H 'Content-Type: application/json' -H 'Authorization: bearer
 00db9a38ea3f86d04dd3eeded9128620f11158eb' -d '{"description":"bake a bread",
 "done":"True"}' http://localhost:8000/todos/1
-</pre>
-
+</pre> 
