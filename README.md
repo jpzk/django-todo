@@ -33,13 +33,12 @@ http://localhost:8000/todos/
 ### Get All Todos
 
 <pre>
-
+curl -X GET -H 'Content-Type: application/json' -H 'Authorization: bearer 41b59e8238bb418c1fc98cfc6f523dd1a7839a03' http://localhost:8000/todos/ 
 </pre>
 
 ### Update a Todo
 
 <pre>
-curl -X PUT -H 'Content-Type: application/json' -H 'Authorization: bearer
-00db9a38ea3f86d04dd3eeded9128620f11158eb' -d '{"description":"bake a bread",
+curl -X PUT -H 'Content-Type: application/json' -H 'Authorization: bearer 41b59e8238bb418c1fc98cfc6f523dd1a7839a03' -d '{"description":"bake a bread",
 "done":"True"}' http://localhost:8000/todos/1
 </pre> 
